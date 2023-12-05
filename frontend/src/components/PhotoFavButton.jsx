@@ -4,7 +4,7 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton(props) {
-  const { photoId, favPhotos, setFavPhotos, onLikeClicked} = props;
+  const { photoId, favPhotos, onLikeClicked} = props;
   
   return (
     <div className="photo-list__fav-icon" onClick={() => onLikeClicked(photoId)}>

@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 import '../styles/TopNavigationBar.scss'
 import TopicList from './TopicList';
 import FavIcon from './FavIcon';
-import HomeRoute from 'routes/HomeRoute';
-import PhotoList from './PhotoList';
-
 
 
 const TopNavigation = (props) => {

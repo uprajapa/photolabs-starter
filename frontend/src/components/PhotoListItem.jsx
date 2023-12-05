@@ -5,10 +5,8 @@ import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
   const { photos, favPhotos, setFavPhotos, onPhotoClicked, onLikeClicked} = props;
-  // console.log(`All Photos in PHOTOlistItem:`, photos);
-  // console.log(`Fav photos:`, favPhotos);
+
   let output = photos.map(data => {
-    // console.log(data);
     return (
       <li key={data.id}>
         <div className="photo-list__item" >

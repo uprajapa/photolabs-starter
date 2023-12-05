@@ -3,21 +3,9 @@ import React from 'react';
 import './App.scss';
 import './styles/PhotoDetailsModal.scss';
 import HomeRoute from 'routes/HomeRoute';
-import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoList from 'components/PhotoList';
 import FavIcon from 'components/FavIcon';
 import useApplicationData from 'hooks/useApplicationData';
-
-// const sampleDataForPhotoListItem = {
-//   id: "1",
-//   location: {
-//     city: "Montreal",
-//     country: "Canada",
-//   },
-//   imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-//   username: "Joe Example",
-//   profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-// };
 
 
 const App = () => {
@@ -25,7 +13,7 @@ const App = () => {
   const {
     favPhotos, setFavPhotos, photoClicked, loading, onPhotoClicked, onLikeClicked, photos, topics
   } = useApplicationData();
-  console.log(`Topics: ${topics}`);
+  
   return (
     <div className="App">
       {loading &&

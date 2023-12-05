@@ -8,6 +8,7 @@ import PhotoList from 'components/PhotoList';
 const HomeRoute = (props) => {
   const { photos, topics, favPhotos, setFavPhotos, onPhotoClicked, onLikeClicked} = props;
   const [favPhotosToDisplay, setFavPhotosToDisplay] = useState(false);
+  const [topicsToDisplay, setTopicsToDisplay] = useState(topics);
   
   const toggleFavourite = () => {
     setFavPhotosToDisplay(!favPhotosToDisplay);
