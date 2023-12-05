@@ -8,11 +8,20 @@ const sampleDataForTopicListItem = {
   label: "Nature",
 };
 
-const TopicListItem = () => {
+const TopicListItem = (props) => {
+  const { topics } = props;
+  let output = topics.map(data => {
+    return (
+      <div className="topic-list__item" key={data.id}>
+        <span>{data.title}</span>
+      </div>
+    );
+  });
+
   return (
-    <div className="topic-list__item">
-      {/* Insert React */}
-    </div>
+    <>
+      {output}
+    </>
   );
 };
 

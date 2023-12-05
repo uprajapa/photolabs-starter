@@ -1,21 +1,43 @@
 import React from "react";
 
 import "../styles/PhotoListItem.scss";
+import PhotoFavButton from "./PhotoFavButton";
 
+const PhotoListItem = (props) => {
+  const { photos, favPhotos, setFavPhotos, setPhotoClicked, onLikeClicked} = props;
+  // console.log(`All Photos in PHOTOlistItem:`, photos);
+  // console.log(`Fav photos:`, favPhotos);
+  let output = photos.map(data => {
+    // console.log(data);
+    return (
+      <li key={data.id}>
+        <div className="photo-list__item" >
+          <PhotoFavButton
+            key={data.id}
+            favPhotos={favPhotos}
+            setFavPhotos={setFavPhotos}
+            photoId={data.id}
+            onLikeClicked={onLikeClicked}
 
-const sampleDataForPhotoListItem = {
-  id: "1",
-  location: {
-    city: "Montreal",
-    country: "Canada",
-  },
-  imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-  username: "Joe Example",
-  profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-};
+          />
+          <img src={data.urls.regular} className="photo-list__image" onClick={() => setPhotoClicked({data})} name="imageSource" />
+          <div className="photo-list__user-details">
+            <img src={data.user.profile} className="photo-list__user-profile" />
+            <div className="photo-list__user-text">
+              <span className="photo-list__user-info">{data.user.username}</span>
+              <span className="photo-list__user-location">{data.location.city}, {data.location.country}</span>
+            </div>
+          </div>
+        </div>
+      </li>
+    );
+  });
 
-const PhotoListItem = () => {
-  /* Insert React */
+  return (
+    <>
+      {output}
+    </>
+  );
 };
 
 export default PhotoListItem;
