@@ -31,4 +31,4 @@ Read [backend/readme](https://github.com/uprajapa/photolabs-starter/tree/main/ba
 cd backend
 npm start
 ```
-## For better reference, see [photos]()
+## For better reference, see [photos](https://github.com/uprajapa/photolabs-starter/tree/main/backend/docs)
