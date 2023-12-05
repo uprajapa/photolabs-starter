@@ -1,14 +1,16 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 
 import photos from 'mocks/photos';
-import topics from 'mocks/topics';
+// import topics from 'mocks/topics';
+import axios from "axios";
 
 const ACTIONS = {
   FAV_PHOTO_TOGGLE: 'FAV_PHOTO_TOGGLE',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   SELECT_PHOTO: 'SELECT_PHOTO',
-  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
+  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+  PAGE_LOADED: 'PAGE_LOADED'
 }
 
 function reducer(state, action) {
@@ -29,10 +31,23 @@ function reducer(state, action) {
       }
 
     case ACTIONS.SELECT_PHOTO:
-      console.log(`Photo selected`);
       newState.photoClicked = action.payload;
       return newState;
   
+    case ACTIONS.SET_TOPIC_DATA:
+      newState.topics = [];
+      console.log(action.payload);
+      action.payload.forEach(topic => newState.topics.push(topic));
+      // newState.topics.push(action.payload);
+      console.log(`State Value changes`);
+      console.log(newState.topics);
+      return newState;
+
+    case ACTIONS.PAGE_LOADED:
+      newState.loading = true;
+      console.log(`State Value changes`);
+      return newState;
+
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -41,7 +56,23 @@ function reducer(state, action) {
 }
 
 export default function useApplicationData() {
-  const [state, dispatch] = useReducer(reducer, { likedPhotos : [], photoClicked : {} });  
+  const [state, dispatch] = useReducer(reducer, { topics: [], likedPhotos : [], photoClicked : {}, loading: false });  
+
+  useEffect(() => {
+    console.log('Running axios req...');
+    axios({
+      method: 'GET',
+      url: '/api/topics'
+    })
+    .then((data) => {
+      console.log(data.data);
+      // topics = data.data;
+      dispatch({ type: `SET_TOPIC_DATA`, payload: data.data})
+      // dispatch({ type: `PAGE_LOADED`})
+    })
+    .then(() => dispatch({type: 'PAGE_LOADED'}))
+    .catch(err => console.log(err))
+  }, []);
 
   const onLikeClicked = (id) => {
     dispatch({ type: `FAV_PHOTO_TOGGLE`, payload: id})
@@ -52,5 +83,5 @@ export default function useApplicationData() {
   };
   
 
-  return { favPhotos: state.likedPhotos, photoClicked: state.photoClicked, onPhotoClicked, onLikeClicked, photos, topics };
+  return { favPhotos: state.likedPhotos, photoClicked: state.photoClicked, loading: state.loading, onPhotoClicked, onLikeClicked, photos, topics: state.topics };
 };

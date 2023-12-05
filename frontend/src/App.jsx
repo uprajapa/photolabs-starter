@@ -23,19 +23,22 @@ import useApplicationData from 'hooks/useApplicationData';
 const App = () => {
 
   const {
-    favPhotos, setFavPhotos, photoClicked, onPhotoClicked, onLikeClicked, photos, topics
+    favPhotos, setFavPhotos, photoClicked, loading, onPhotoClicked, onLikeClicked, photos, topics
   } = useApplicationData();
-  console.log(`Photo clicked! ${photoClicked}`);
+  console.log(`Topics: ${topics}`);
   return (
     <div className="App">
-      <HomeRoute
-        photos={photos}
-        topics={topics}
-        favPhotos={favPhotos}
-        setFavPhotos={setFavPhotos}
-        onPhotoClicked={onPhotoClicked}
-        onLikeClicked={onLikeClicked}
-      />
+      {loading &&
+        <HomeRoute
+          photos={photos}
+          topics={topics}
+          favPhotos={favPhotos}
+          setFavPhotos={setFavPhotos}
+          onPhotoClicked={onPhotoClicked}
+          onLikeClicked={onLikeClicked}
+        />
+      }
+      {loading ?? <h1>Page ias still Loading </h1>}
       {photoClicked && photoClicked.data &&
         <div className="photo-details-modal">
           <button className='photo-details-modal__close-button' onClick={() => onPhotoClicked({})}>X</button>
