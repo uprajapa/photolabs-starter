@@ -5,10 +5,10 @@ import TopicListItem from "./TopicListItem";
 
 
 const TopicList = (props) => {
-  const { topics } = props;
+  const { topics, onCategorySelected } = props;
   return (
     <div className="top-nav-bar__topic-list">
-      <TopicListItem topics={topics} />
+      <TopicListItem topics={topics} onCategorySelected={onCategorySelected} />
     </div>
   );
 };

@@ -9,10 +9,10 @@ const sampleDataForTopicListItem = {
 };
 
 const TopicListItem = (props) => {
-  const { topics } = props;
+  const { topics, onCategorySelected } = props;
   let output = topics.map(data => {
     return (
-      <div className="topic-list__item" key={data.id}>
+      <div className="topic-list__item" key={data.id} onClick={() => onCategorySelected(data.id)}>
         <span>{data.title}</span>
       </div>
     );

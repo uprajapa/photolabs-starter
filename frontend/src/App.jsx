@@ -11,7 +11,7 @@ import useApplicationData from 'hooks/useApplicationData';
 const App = () => {
 
   const {
-    favPhotos, setFavPhotos, photoClicked, loading, onPhotoClicked, onLikeClicked, photos, topics
+    favPhotos, setFavPhotos, photoClicked, loading, onPhotoClicked, onLikeClicked, photos, topics, onCategorySelected
   } = useApplicationData();
   
   return (
@@ -24,6 +24,7 @@ const App = () => {
           setFavPhotos={setFavPhotos}
           onPhotoClicked={onPhotoClicked}
           onLikeClicked={onLikeClicked}
+          onCategorySelected={onCategorySelected}
         />
       }
       {loading ?? <h1>Page ias still Loading </h1>}
