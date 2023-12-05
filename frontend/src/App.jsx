@@ -21,12 +21,11 @@ import useApplicationData from 'hooks/useApplicationData';
 
 
 const App = () => {
- 
+
   const {
-    favPhotos, setFavPhotos, photoClicked, setPhotoClicked, onLikeClicked, photos, topics
+    favPhotos, setFavPhotos, photoClicked, onPhotoClicked, onLikeClicked, photos, topics
   } = useApplicationData();
-  console.log(`App re-rendered!`);
-  console.log(`FavPhotos: ${favPhotos}`);
+  console.log(`Photo clicked! ${photoClicked}`);
   return (
     <div className="App">
       <HomeRoute
@@ -34,18 +33,17 @@ const App = () => {
         topics={topics}
         favPhotos={favPhotos}
         setFavPhotos={setFavPhotos}
-        setPhotoClicked={setPhotoClicked}
+        onPhotoClicked={onPhotoClicked}
         onLikeClicked={onLikeClicked}
       />
       {photoClicked && photoClicked.data &&
         <div className="photo-details-modal">
-          <button className='photo-details-modal__close-button' onClick={() => setPhotoClicked({})}>X</button>
+          <button className='photo-details-modal__close-button' onClick={() => onPhotoClicked({})}>X</button>
           <div className="photo-details-modal__div">
 
-            <div className="photo-list__fav-icon" onClick={() => onLikeClicked(favPhotos, setFavPhotos, photoClicked.data.id)}>
+            <div className="photo-list__fav-icon" onClick={() => onLikeClicked(photoClicked.data.id)}>
               <div className="photo-list__fav-icon-svg">
-                { favPhotos.includes(photoClicked.data.id) ? <FavIcon selected={true} /> : <FavIcon selected={false} />}
-                {/* <FavIcon selected={like} /> */}
+                <FavIcon selected={favPhotos.includes(photoClicked.data.id)} />
               </div>
             </div>
 
@@ -61,7 +59,7 @@ const App = () => {
               Similar Photos
             </div>
             <div className=''>
-              <PhotoList photos={Object.values(photoClicked.data.similar_photos)} favPhotos={favPhotos} setFavPhotos={setFavPhotos} setPhotoClicked={setPhotoClicked} />
+              <PhotoList photos={Object.values(photoClicked.data.similar_photos)} favPhotos={favPhotos} setFavPhotos={setFavPhotos} onPhotoClicked={onPhotoClicked} />
             </div>
           </div>
         </div>

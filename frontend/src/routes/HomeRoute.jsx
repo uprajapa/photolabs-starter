@@ -6,7 +6,7 @@ import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 
 const HomeRoute = (props) => {
-  const { photos, topics, favPhotos, setFavPhotos, setPhotoClicked, onLikeClicked} = props;
+  const { photos, topics, favPhotos, setFavPhotos, onPhotoClicked, onLikeClicked} = props;
   const [favPhotosToDisplay, setFavPhotosToDisplay] = useState(false);
   
   const toggleFavourite = () => {
@@ -15,8 +15,6 @@ const HomeRoute = (props) => {
 
   const filteredPhotos = favPhotosToDisplay ?
     [...photos].filter(photo => {
-      console.log(`Photo:`, photo);
-      console.log(`Fav Photo inside filter: `, favPhotos);
       return favPhotos.includes(photo.id);
     })
     :
@@ -29,7 +27,7 @@ const HomeRoute = (props) => {
         photos={filteredPhotos}
         favPhotos={favPhotos}
         setFavPhotos={setFavPhotos}
-        setPhotoClicked={setPhotoClicked}
+        onPhotoClicked={onPhotoClicked}
         onLikeClicked={onLikeClicked}
       />
     </div>

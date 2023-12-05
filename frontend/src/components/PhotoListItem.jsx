@@ -4,7 +4,7 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
-  const { photos, favPhotos, setFavPhotos, setPhotoClicked, onLikeClicked} = props;
+  const { photos, favPhotos, setFavPhotos, onPhotoClicked, onLikeClicked} = props;
   // console.log(`All Photos in PHOTOlistItem:`, photos);
   // console.log(`Fav photos:`, favPhotos);
   let output = photos.map(data => {
@@ -20,7 +20,7 @@ const PhotoListItem = (props) => {
             onLikeClicked={onLikeClicked}
 
           />
-          <img src={data.urls.regular} className="photo-list__image" onClick={() => setPhotoClicked({data})} name="imageSource" />
+          <img src={data.urls.regular} className="photo-list__image" onClick={() => onPhotoClicked({data})} name="imageSource" />
           <div className="photo-list__user-details">
             <img src={data.user.profile} className="photo-list__user-profile" />
             <div className="photo-list__user-text">
