@@ -10,7 +10,8 @@ const ACTIONS = {
   SELECT_PHOTO: 'SELECT_PHOTO',
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
   PAGE_LOADED: 'PAGE_LOADED',
-  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
+  SEARCH_PHOTOS: 'SEARCH_PHOTOS'
 }
 
 function reducer(state, action) {
@@ -53,6 +54,17 @@ function reducer(state, action) {
       newState.loading = true;
       return newState;
 
+    case ACTIONS.SEARCH_PHOTOS:
+      console.log(action.payload);
+      if (action.payload.length > 0) {
+        newState.searchInput = action.payload;
+        newState.searchedPhotos = newState.photos.filter(photo => photo.user.username.includes(action.payload));
+        return newState;
+      } else { 
+        newState.searchInput = action.payload;
+        return newState;
+      }
+
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -62,7 +74,7 @@ function reducer(state, action) {
 
 
 export default function useApplicationData() {
-  const [state, dispatch] = useReducer(reducer, { photos: [], topics: [], likedPhotos: [], photoClicked: {}, loading: false });
+  const [state, dispatch] = useReducer(reducer, { photos: [], topics: [], likedPhotos: [], photoClicked: {}, loading: false, searchInput: '', searchedPhotos: [] });
 
   useEffect(() => {
     axios({
@@ -99,7 +111,6 @@ export default function useApplicationData() {
       .catch(() => console.log("Error getting categories"))
   };
 
-
   return {
     favPhotos: state.likedPhotos,
     photoClicked: state.photoClicked,
@@ -108,6 +119,9 @@ export default function useApplicationData() {
     onCategorySelected,
     onLikeClicked,
     photos: state.photos,
-    topics: state.topics
+    topics: state.topics,
+    searchInput: state.searchInput,
+    dispatch,
+    searchedPhotos: state.searchedPhotos
   };
 };

@@ -11,6 +11,11 @@ const client = new pg.Client({
 
 client
   .connect()
+  .then((db) => {
+    db.query('SELECT * FROM topics;')
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+  })
   .catch(e => console.log(`Error connecting to Postgres server:\n${e}`));
 
 module.exports = client;

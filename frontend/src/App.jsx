@@ -11,13 +11,25 @@ import useApplicationData from 'hooks/useApplicationData';
 const App = () => {
 
   const {
-    favPhotos, setFavPhotos, photoClicked, loading, onPhotoClicked, onLikeClicked, photos, topics, onCategorySelected
+    favPhotos, setFavPhotos, photoClicked, loading, onPhotoClicked, onLikeClicked, photos, topics, onCategorySelected, searchInput, searchedPhotos, dispatch
   } = useApplicationData();
   
   return (
     <div className="App">
       {loading &&
-        <HomeRoute
+        ( searchInput ? 
+          <HomeRoute
+            photos={searchedPhotos}
+            topics={topics}
+            favPhotos={favPhotos}
+            setFavPhotos={setFavPhotos}
+            onPhotoClicked={onPhotoClicked}
+            onLikeClicked={onLikeClicked}
+            onCategorySelected={onCategorySelected}
+            searchInput={searchInput}
+            dispatch={dispatch}
+          /> :
+          <HomeRoute
           photos={photos}
           topics={topics}
           favPhotos={favPhotos}
@@ -25,7 +37,10 @@ const App = () => {
           onPhotoClicked={onPhotoClicked}
           onLikeClicked={onLikeClicked}
           onCategorySelected={onCategorySelected}
+          searchInput={searchInput}
+          dispatch={dispatch}
         />
+        )
       }
       {loading ?? <h1>Page ias still Loading </h1>}
       {photoClicked && photoClicked.data &&
