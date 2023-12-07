@@ -8,7 +8,6 @@ const ACTIONS = {
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   SELECT_PHOTO: 'SELECT_PHOTO',
-  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
   PAGE_LOADED: 'PAGE_LOADED',
   GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 }
@@ -19,14 +18,12 @@ function reducer(state, action) {
     case ACTIONS.FAV_PHOTO_TOGGLE:
       const newFavPhotos = [...state.likedPhotos];
       if (newFavPhotos.includes(action.payload)) {
-        console.log(`Inside if!`, state.likedPhotos);
         const trgtIndex = newFavPhotos.findIndex(x => x == String(action.payload));
         newFavPhotos.splice(trgtIndex, 1);
         newState.likedPhotos = newFavPhotos;
         return newState;
       } else {
         newState.likedPhotos = [...state.likedPhotos, action.payload];
-        console.log(`Inside else`, newState.likedPhotos);
         return newState;
       }
 
@@ -73,10 +70,10 @@ export default function useApplicationData() {
       .then(() => {
         axios.get('/api/photos')
           .then((res) => dispatch({ type: 'SET_PHOTO_DATA', payload: res.data }))
-          .catch((err) => console.log(err.message))
+          .catch((err) => {throw err})
       })
       .then(() => dispatch({ type: 'PAGE_LOADED' }))
-      .catch(err => console.log(err))
+      .catch(err => {throw err})
   }, []);
 
 
@@ -93,10 +90,9 @@ export default function useApplicationData() {
     axios
       .get(`/api/topics/photos/${id}`)
       .then(data => {
-        console.log(data.data)
         dispatch({ type: `GET_PHOTOS_BY_TOPICS`, payload: data.data })
       })
-      .catch(() => console.log("Error getting categories"))
+      .catch((err) => {throw err})
   };
 
 

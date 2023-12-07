@@ -11,6 +11,6 @@ const client = new pg.Client({
 
 client
   .connect()
-  .catch(e => console.log(`Error connecting to Postgres server:\n${e}`));
+  .catch(e => {throw e});
 
 module.exports = client;

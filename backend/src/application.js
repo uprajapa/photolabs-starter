@@ -49,14 +49,11 @@ module.exports = function application(
           db.query(create)
             .then(() => db.query(seed))
             .then(() => {
-              console.log("Database Reset");
               response.status(200).send("Database Reset");
             });
         });
       })
-      .catch(error => {
-        console.log(`Error setting up the reset route: ${error}`);
-      });
+      .catch(error => { throw error });
   }
 
   app.close = function() {

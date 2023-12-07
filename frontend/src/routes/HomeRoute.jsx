@@ -8,8 +8,8 @@ import PhotoList from 'components/PhotoList';
 const HomeRoute = (props) => {
   const { photos, topics, favPhotos, setFavPhotos, onPhotoClicked, onLikeClicked, onCategorySelected } = props;
   const [favPhotosToDisplay, setFavPhotosToDisplay] = useState(false);
-  // const [topicsToDisplay, setTopicsToDisplay] = useState(topics);
   
+  // Toggle method to visit liked photos page and back to home page
   const toggleFavourite = () => {
     setFavPhotosToDisplay(!favPhotosToDisplay);
   };
