@@ -13,7 +13,7 @@ const TopNavigation = (props) => {
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <TopicList topics={topics} favPhotos={favPhotos} setFavPhotos={setFavPhotos} onCategorySelected={onCategorySelected} />
       <button onClick={toggleFavourite} className='favouriteButton'>
-        { favPhotos && favPhotos.length > 0 ? <FavIcon selected="true" displayAlert="faef"/> : <FavIcon selected="true" />}
+        { favPhotos && favPhotos.length > 0 ? <FavIcon selected displayAlert/> : <FavIcon selected />}
       </button>
     </div>
   );

@@ -4,7 +4,7 @@ import './App.scss';
 import './styles/PhotoDetailsModal.scss';
 import HomeRoute from 'routes/HomeRoute';
 import useApplicationData from 'hooks/useApplicationData';
-import { Modal } from 'components/Modal';
+import { PhotoDetailsModal } from 'routes/PhotoDetailsModal';
 
 
 const App = () => {
@@ -28,7 +28,7 @@ const App = () => {
       }
       {loading ?? <h1>Page ias still Loading </h1>}
       {photoClicked.id &&
-        <Modal
+        <PhotoDetailsModal
           photos={photos}
           favPhotos={favPhotos}
           setFavPhotos={setFavPhotos}
