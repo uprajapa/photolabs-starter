@@ -6,6 +6,10 @@ The Full-stack SPA project with following technincal specifications:
 - Babel
 - Axios
 
+## SETUP 
+
+Clone this repository on your system and install dependencies with 'npm install' in each respective /frontend and /backend
+
 ## Features
 
 1. A user can view photos from the homepage loaded from the API.
@@ -31,4 +35,10 @@ Read [backend/readme](https://github.com/uprajapa/photolabs-starter/tree/main/ba
 cd backend
 npm start
 ```
-## For better reference, see [photos](https://github.com/uprajapa/photolabs-starter/tree/main/backend/docs)
+
+## Homepage
+
+![homePage](<Screenshot 2023-12-06 at 11.52.30 PM.png>)
+
+
+### For better reference, see [more photos](https://github.com/uprajapa/photolabs-starter/tree/main/backend/docs)
