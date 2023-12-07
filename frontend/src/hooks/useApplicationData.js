@@ -95,7 +95,6 @@ export default function useApplicationData() {
       .catch((err) => {throw err})
   };
 
-
   return {
     favPhotos: state.likedPhotos,
     photoClicked: state.photoClicked,

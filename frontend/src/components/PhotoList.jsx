@@ -5,17 +5,24 @@ import PhotoListItem from "./PhotoListItem";
 
 
 const PhotoList = (props) => {
-  const { photos, favPhotos, setFavPhotos, onPhotoClicked, onLikeClicked} = props;
+  const { photos, favPhotos, setFavPhotos, onPhotoClicked, onLikeClicked } = props;
   
-  return (
-    <ul className="photo-list">
+  const photo = photos.map(data => {
+    return (
       <PhotoListItem
-        photos={photos}
+        key={data.id}
+        photo={data}
         setFavPhotos={setFavPhotos}
         favPhotos={favPhotos}
         onPhotoClicked={onPhotoClicked}
         onLikeClicked={onLikeClicked}
       />
+    );
+  });
+
+  return (
+    <ul className="photo-list">
+      {photo}
     </ul>
   );
 };

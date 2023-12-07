@@ -38,7 +38,6 @@ npm start
 
 ## Homepage
 
-![homePage](<Screenshot 2023-12-06 at 11.52.30 PM.png>)
-
+![homePage](homePage.png)
 
 ### For better reference, see [more photos](https://github.com/uprajapa/photolabs-starter/tree/main/backend/docs)
